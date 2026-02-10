@@ -5,7 +5,12 @@ import json
 import fitz
 
 # --- 1. SETUP ---
-api_key = "AIzaSyDllN5WrWDChev9gw0r65xu0eZqv3gGazQ"
+# Try to get the key from Streamlit secrets, or fallback to local for testing
+try:
+    api_key = st.secrets["GOOGLE_API_KEY"]
+except:
+    # This is just for your local machine if you don't use secrets.toml locally
+    api_key = "YOUR_REAL_KEY_HERE"
 
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-2.5-flash')
